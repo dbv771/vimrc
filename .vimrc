@@ -138,6 +138,12 @@ Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
 "vim expand region
 Plug 'terryma/vim-expand-region'
+"vim start page
+Plug 'mhinz/vim-startify'
+"multiple selections
+Plug 'terryma/vim-multiple-cursors'
+"undotree
+Plug 'mbbill/undotree'
 call plug#end()
 " ************END*************
 
@@ -240,7 +246,7 @@ let g:ycm_warning_symbol = '>*'
 let g:ycm_seed_identifiers_with_syntax = 1 
 let g:ycm_complete_in_comments = 1 
 let g:ycm_complete_in_strings = 1 
-nnoremap <leader>u :YcmCompleter GoToDeclaration<cr>
+nnoremap <leader>d :YcmCompleter GoToDeclaration<cr>
 nnoremap <leader>i :YcmCompleter GoToDefinition<cr>
 nnoremap <leader>o :YcmCompleter GoToInclude<cr>
 nnoremap <leader>ff :YcmCompleter FixIt<cr>
@@ -338,6 +344,19 @@ let g:expand_region_text_objects = {
       \ }"
 
 
+" vim-multiple-cursors
+let g:multi_cursor_use_default_mapping = 0
+let g:multi_cursor_start_word_key      = '<C-j>'
+let g:multi_cursor_select_all_word_key = '<A-j>'
+let g:multi_cursor_start_key           = 'g<C-j>'
+let g:multi_cursor_select_all_key      = 'g<A-j>'
+let g:multi_cursor_next_key            = '<C-j>'
+let g:multi_cursor_prev_key            = '<C-k>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+
+"undotree
+nnoremap <leader>u :UndotreeToggle<cr>
 
 "other
 nnoremap <leader>q :q<cr>
