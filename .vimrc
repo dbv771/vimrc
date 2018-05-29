@@ -123,6 +123,21 @@ Plug 'tpope/vim-endwise'
 Plug 'ryanoasis/vim-devicons'
 "vim auto pair
 Plug 'jiangmiao/auto-pairs'
+"fuzzy finder local files
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh'  }
+"text filtering and alignment
+Plug 'godlygeek/tabular'
+"ack
+Plug 'mileszs/ack.vim'
+"vim-smooth_scroll
+Plug 'terryma/vim-smooth-scroll'
+"tarbar
+Plug 'majutsushi/tagbar'
+"MarkdownPreview
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+"vim expand region
+Plug 'terryma/vim-expand-region'
 call plug#end()
 " ************END*************
 
@@ -239,10 +254,88 @@ nnoremap <leader>G :GV!<cr>
 "fills the location list with the revisions of the current file
 nnoremap <leader>gg :GV?<cr>
 
-
 "vim-repeat
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
+"leaderF
+nnoremap <leader>ff :LeaderfFile ~<cr>
+let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+            \}
+let g:Lf_UseCache = 0
+
+"tabular
+let g:tabular_loaded = 1
+nnoremap <leader>l :Tab /\|<cr>
+nnoremap <leader>= :Tab /=<cr>
+
+" ack
+"<Leader>c进行搜索，同时不自动打开第一个匹配的文件"
+map <Leader>c :Ack!<Space> 
+"调用ag进行搜索
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+"高亮搜索关键词
+let g:ackhighlight = 1
+"修改快速预览窗口高度为15
+let g:ack_qhandler = "botright copen 15"
+"在QuickFix窗口使用快捷键以后，自动关闭QuickFix窗口
+let g:ack_autoclose = 1
+"使用ack的空白搜索，即不添加任何参数时对光标下的单词进行搜索，默认值为1，表示开启，置0以后使用空白搜索将返回错误信息
+let g:ack_use_cword_for_empty_search = 1
+"部分功能受限，但对于大项目搜索速度较慢时可以尝试开启
+" let g:ack_use_dispatch = 1
+
+
+" vim-smooth-scroll
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+"tarbar
+let g:tagbar_width = 30
+nnoremap <silent> <leader>t :TagbarToggle<cr>
+inoremap <silent> <leader>t <esc> :TagbarToggle<cr>
+
+" markdown
+let uname = system('uname -s')
+if uname == "Darwin\n"
+    let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+else
+    let g:mkdp_path_to_chrome = '/usr/bin/google-chrome-stable %U'
+endif
+nmap <silent> <F7> <Plug>MarkdownPreview
+imap <silent> <F7> <Plug>MarkdownPreview
+nmap <silent> <F8> <Plug>StopMarkdownPreview
+imap <silent> <F8> <Plug>StopMarkdownPreview
+"vim回调函数，参数打开的url
+let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+"打开markdown自动打开浏览器预览
+"设置为0时关闭
+let g:mkdp_auto_start = 1
+"编辑 markdown 的时候检查预览窗口是否已经打开，否则自动打开预览窗口
+let g:mkdp_auto_open = 1
+"设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时更新预览
+let g:mkdp_refresh_slow = 0
+
+"expand region expand
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ 'i''' :0,
+      \ 'i]'  :1, 
+      \ 'ib'  :1, 
+      \ 'iB'  :1, 
+      \ 'il'  :0, 
+      \ 'ip'  :1,
+      \ 'ie'  :0, 
+      \ }"
 
 
 
