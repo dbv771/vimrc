@@ -144,6 +144,8 @@ Plug 'mhinz/vim-startify'
 Plug 'terryma/vim-multiple-cursors'
 "undotree
 Plug 'mbbill/undotree'
+"fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 call plug#end()
 " ************END*************
 
@@ -246,7 +248,7 @@ let g:ycm_warning_symbol = '>*'
 let g:ycm_seed_identifiers_with_syntax = 1 
 let g:ycm_complete_in_comments = 1 
 let g:ycm_complete_in_strings = 1 
-nnoremap <leader>d :YcmCompleter GoToDeclaration<cr>
+nnoremap <leader>h :YcmCompleter GoToDeclaration<cr>
 nnoremap <leader>i :YcmCompleter GoToDefinition<cr>
 nnoremap <leader>o :YcmCompleter GoToInclude<cr>
 nnoremap <leader>ff :YcmCompleter FixIt<cr>
@@ -358,8 +360,42 @@ let g:multi_cursor_quit_key            = '<Esc>'
 "undotree
 nnoremap <leader>u :UndotreeToggle<cr>
 
+"fzf settings
+nnoremap <Tab> :FZF <cr>
+function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val  }'))
+    copen
+    cc
+endfunction
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+"Default fzf layout
+let g:fzf_layout = { 'down': '~40%'  }
+"set up fzf window using a Vim command
+let g:fzf_layout = { 'window': 'enew'  }
+let g:fzf_layout = { 'window': '-tabnew'  }
+let g:fzf_layout = { 'window': '10split enew'  }
+let g:fzf_colors =
+            \ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 "other
 nnoremap <leader>q :q<cr>
 "buffer change
 nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
+nnoremap <leader>d :bd<cr>
