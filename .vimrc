@@ -113,6 +113,8 @@ Plug 'tpope/vim-commentary'
 "git commit browser
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+"git gutter
+Plug 'airblade/vim-gitgutter'
 "vim-repeat
 Plug 'tpope/vim-repeat'
 "vim-surround
@@ -277,6 +279,29 @@ nnoremap <leader>g :GV<cr>
 nnoremap <leader>G :GV!<cr>
 "fills the location list with the revisions of the current file
 nnoremap <leader>gg :GV?<cr>
+
+"tpope/vim-fugitive
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gm :Gmove<cr>
+nnoremap <leader>gc :Gcommit -a <cr>
+nnoremap <leader>gs :Gstatus<cr>
+
+" vim-gitgutter
+" gitgutter customise symbols
+let g:gitgutter_sign_added = 'A'
+let g:gitgutter_sign_modified = 'M'
+let g:gitgutter_sign_removed = 'D'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = 'W'
+" gitgutter mappings
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk]
+nmap <Leader>hv <Plug>GitGutterPreviewHunk
+" stage, and undo hunks with  <leader>hs, and <leader>hu
+nnoremap <leader>go :GitGutterLineHighlightsEnable<cr>
+nnoremap <leader>gf :GitGutterLineHighlightsDisable<cr>
+nnoremap <leader>gt :GitGutterLineHighlightsToggle<cr>
 
 "vim-repeat
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
