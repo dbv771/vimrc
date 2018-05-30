@@ -82,7 +82,6 @@ set termencoding=utf-8
 set encoding=utf8
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 
-
 " vim-plug 
 " ************BEGIN*************
 call plug#begin('~/.vim/plugged')
@@ -105,7 +104,8 @@ Plug 'haya14busa/incsearch.vim'
 "vim-easymotion
 Plug 'easymotion/vim-easymotion'
 "YCM
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --java-completer' }
 "Vim-script library L9
 Plug 'vim-scripts/L9'
 "vim-commentary
@@ -146,6 +146,10 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'mbbill/undotree'
 "fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+"paste plugins
+Plug 'ConradIrwin/vim-bracketed-paste'
+"java complete
+Plug 'artur-shaik/vim-javacomplete2'
 call plug#end()
 " ************END*************
 
@@ -248,11 +252,23 @@ let g:ycm_warning_symbol = '>*'
 let g:ycm_seed_identifiers_with_syntax = 1 
 let g:ycm_complete_in_comments = 1 
 let g:ycm_complete_in_strings = 1 
-nnoremap <leader>h :YcmCompleter GoToDeclaration<cr>
-nnoremap <leader>i :YcmCompleter GoToDefinition<cr>
-nnoremap <leader>o :YcmCompleter GoToInclude<cr>
-nnoremap <leader>ff :YcmCompleter FixIt<cr>
-nmap <F5> :YcmDiags<cr>
+"******************** YCM C language mappings**************************
+" nnoremap <leader>h :YcmCompleter GoToDeclaration<cr>
+" nnoremap <leader>i :YcmCompleter GoToDefinition<cr>
+" nnoremap <leader>o :YcmCompleter GoToInclude<cr>
+" nnoremap <leader>ii :YcmCompleter FixIt<cr>
+" nmap <F4> :YcmDiags<cr>
+"******************** YCM Java language mappings**************************
+nnoremap <Tab>o :YcmCompleter OrganizeImports<cr>
+nnoremap <Tab>f :YcmCompleter Format<cr>
+nnoremap <Tab>e :YcmCompleter FixIt<cr>
+nnoremap <Tab>d :YcmCompleter GoToDefinition<cr>
+nnoremap <Tab>r :YcmCompleter GoToReferences<cr>
+nnoremap <Tab>c :YcmCompleter GetDoc<cr>
+nnoremap <Tab>t :YcmCompleter GetType<cr>
+nnoremap <Tab>n :YcmCompleter RefactorRename 
+map <F5> :!javac %&&java %:r <CR>
+
 
 "git commit browser:vim-fugitive and gv
 "open commit browser
@@ -399,3 +415,4 @@ nnoremap <leader>q :q<cr>
 nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
 nnoremap <leader>d :bd<cr>
+nnoremap <c-d> yyp

@@ -28,3 +28,7 @@ Now with the cursor on "Hello", press ysiw] (iw is a text object).
 Let's make that braces and add some space (use } instead of { for no space): cs]{
 
 { Hello } world!
+
+
+********************ConradIrwin/vim-bracketed-paste*******************
+using command+v, shift+insert, ctrl+shift+v or middle-click to paste
