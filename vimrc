@@ -134,7 +134,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'easymotion/vim-easymotion'
 "YCM
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --java-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --java-completer --gocode-completer' }
 "Vim-script library L9
 Plug 'vim-scripts/L9'
 "vim-commentary
@@ -190,6 +190,8 @@ Plug 'vim-scripts/bufexplorer.zip'
 Plug 'maxbrunsfeld/vim-yankstack'
 "synchronous Lint Engine 语法检查
 Plug 'w0rp/ale'
+"go plugins
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 call plug#end()
 " ************END*************
 
@@ -275,7 +277,7 @@ map g# <Plug>(incsearch-nohl-g#)
 "使用<Esc><Esc>暂时关闭高亮功能
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 "使用Ctrl+k统计匹配个数
-nnoremap <silent> <C-k> :%s///gn<CR>
+" nnoremap <silent> <C-k> :%s///gn<CR>
 
 "vim-easymotion
 let g:EasyMotion_smartcase=1
@@ -493,13 +495,38 @@ let g:ale_sign_warning = '⚡'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"文件内容发生变化时不进行检查
+let g:ale_lint_on_text_changed = 'never'
+"打开文件时不进行检查
+let g:ale_lint_on_enter = 0"
+" 使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
+let g:ale_linters = {
+            \   'c++': ['clang'],
+            \   'c': ['clang'],
+            \   'python': ['pylint'],
+            \   'java': ['javac'],
+            \   'Go': ['gofmt'],
+            \}
+
 "普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
 nmap sp <Plug>(ale_previous_wrap)
 nmap sn <Plug>(ale_next_wrap)
-"<Leader>s触发/关闭语法检查
+"<Leader>a触发/关闭语法检查
 nmap <Leader>a :ALEToggle<CR>
-"<Leader>d查看错误或警告的详细信息
+"<Leader>ad查看错误或警告的详细信息
 nmap <Leader>ad :ALEDetail<CR>
+
+"vim-go
+au FileType go nmap <Space>b :GoBuild<cr>
+au FileType go nmap <Space>r :GoRun<cr>
+au FileType go nmap <Space>d :GoDef<cr>
+au FileType go nmap <Space>i :GoImport 
+au FileType go nmap <Space>n :GoRename<cr>
+au FileType go nmap <Space>s :GoInstall<cr>
+au FileType go nmap <Space>t :GoTest<cr>
+au FileType go nmap <Space>at :GoAddTags<cr>
+au FileType go nmap <Space>rt :GoRemoveTags<cr>
+let g:go_fmt_command = "goimports"
 
 
 "other
