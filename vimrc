@@ -181,6 +181,13 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'ConradIrwin/vim-bracketed-paste'
 "java complete
 Plug 'artur-shaik/vim-javacomplete2'
+"Distraction-free writing in Vim
+Plug 'junegunn/goyo.vim'
+Plug 'amix/vim-zenroom2'
+"buffer change
+Plug 'vim-scripts/bufexplorer.zip'
+"intains a history of previous yanks
+Plug 'maxbrunsfeld/vim-yankstack'
 call plug#end()
 " ************END*************
 
@@ -464,6 +471,14 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+"junegunn/goyo.vim
+nnoremap <c-w> :Goyo <cr>
+
+"yankstack
+nmap <leader>o <Plug>yankstack_substitute_older_paste
+nmap <leader>O <Plug>yankstack_substitute_newer_paste
+
+
 "other
 nnoremap <leader>q :q<cr>
 "buffer change
@@ -477,3 +492,10 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+
+"mapping esc
+inoremap jj <Esc>
+
+" C-U in insert/normal mode, to uppercase the word under cursor
+inoremap <c-u> <esc>viwUea
+nnoremap <c-u> viwUe
