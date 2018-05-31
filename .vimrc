@@ -82,6 +82,35 @@ set termencoding=utf-8
 set encoding=utf8
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 新建文件设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufNewFile *.cpp,*.cc,*.c,*.hpp,*.h,*.sh,*.py exec ":call SetTitle()" 
+func SetTitle() 
+	if expand("%:e") == 'sh'
+		call setline(1,"\#!/bin/bash") 
+		call append(line("."), "") 
+    elseif expand("%:e") == 'py'
+        call setline(1,"#!/usr/bin/env python")
+        call append(line("."),"# coding=utf-8")
+	    call append(line(".")+1, "") 
+    elseif expand("%:e") == 'cpp'
+		call setline(1,"#include <iostream>") 
+		call append(line("."), "") 
+    elseif expand("%:e") == 'cc'
+		call setline(1,"#include <iostream>") 
+		call append(line("."), "") 
+    elseif expand("%:e") == 'c'
+		call setline(1,"#include <stdio.h>") 
+		call append(line("."), "") 
+    elseif expand("%:e") == 'h'
+		call setline(1, "#pragma once")
+    elseif expand("%:e") == 'hpp'
+		call setline(1, "#pragma once")
+	endif
+endfunc 
+autocmd BufNewFile * normal G
+
 " vim-plug 
 " ************BEGIN*************
 call plug#begin('~/.vim/plugged')
@@ -286,6 +315,7 @@ nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gm :Gmove<cr>
 nnoremap <leader>gc :Gcommit -a <cr>
 nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gp :Gpush<cr>
 
 " vim-gitgutter
 " gitgutter customise symbols
