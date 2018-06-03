@@ -4,46 +4,46 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = ","	"定义<leader>键
-set nocompatible 	"设置不兼容原始vi模式
-filetype on		"设置开启文件类型侦测
-filetype plugin on	"加载对应文件类型插件
-set noeb		"关闭错误提示
-syntax enable		"开启语法高亮功能
-syntax on		"自动语法高亮
-set t_Co=256		"开启256色支持
-set cmdheight=2		"设置命令行高度
-set showcmd		"select模式下显示选中的行数
-set ruler		"总是显示光标的位置
-set laststatus=2	"总是显示状态栏
-set number		"开启行号显示
-set cursorline		"高亮显示当前行
-set whichwrap+=<,>,h,l	"设置光标键跨行
-set virtualedit=block,onemore	"允许光标出现在最后一个字符的后面
+let mapleader = "," "定义<leader>键
+set nocompatible    "设置不兼容原始vi模式
+filetype on     "设置开启文件类型侦测
+filetype plugin on  "加载对应文件类型插件
+set noeb        "关闭错误提示
+syntax enable       "开启语法高亮功能
+syntax on       "自动语法高亮
+set t_Co=256        "开启256色支持
+set cmdheight=2     "设置命令行高度
+set showcmd     "select模式下显示选中的行数
+set ruler       "总是显示光标的位置
+set laststatus=2    "总是显示状态栏
+set number      "开启行号显示
+set cursorline      "高亮显示当前行
+set whichwrap+=<,>,h,l  "设置光标键跨行
+set virtualedit=block,onemore   "允许光标出现在最后一个字符的后面
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "代码缩进与排版
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set autoindent		"设置自动缩进
-set cindent		"设置使用C/C++语言的自动缩进方式
-set cinoptions=g0,:0,N-s,(0	"设置使用C/C++语言的具体缩进方式
-set smartindent		"智能选择对齐方式
-filetype indent on	"自适应不同语言的智能缩进
-set expandtab 		"将制表符扩展为空格
-set tabstop=4		"设置编辑时制表符所占的空格数
-set shiftwidth=4	"设置格式化时制表符占用的空格数
-set softtabstop=4		"设置4个空格为制表符
-set smarttab		"在行和段开始处使用制表符
-"set nowrap		"禁止折行
-set backspace=2		"使用回车键正常处理indent.eol,start等
+set autoindent      "设置自动缩进
+set cindent     "设置使用C/C++语言的自动缩进方式
+set cinoptions=g0,:0,N-s,(0 "设置使用C/C++语言的具体缩进方式
+set smartindent     "智能选择对齐方式
+filetype indent on  "自适应不同语言的智能缩进
+set expandtab       "将制表符扩展为空格
+set tabstop=4       "设置编辑时制表符所占的空格数
+set shiftwidth=4    "设置格式化时制表符占用的空格数
+set softtabstop=4       "设置4个空格为制表符
+set smarttab        "在行和段开始处使用制表符
+"set nowrap     "禁止折行
+set backspace=2     "使用回车键正常处理indent.eol,start等
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "代码补全
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set wildmenu		"vim自身命令行模式智能补全
-set completeopt-=preview	"补全时不显示窗口，只显示补全列表
+set wildmenu        "vim自身命令行模式智能补全
+set completeopt-=preview    "补全时不显示窗口，只显示补全列表
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -85,33 +85,33 @@ set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 新建文件设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufNewFile *.cpp,*.cc,*.c,*.hpp,*.h,*.sh,*.py exec ":call SetTitle()" 
-func SetTitle() 
-	if expand("%:e") == 'sh'
-		call setline(1,"\#!/bin/bash") 
-		call append(line("."), "") 
+autocmd BufNewFile *.cpp,*.cc,*.c,*.hpp,*.h,*.sh,*.py exec ":call SetTitle()"
+func SetTitle()
+    if expand("%:e") == 'sh'
+        call setline(1,"\#!/bin/bash")
+        call append(line("."), "")
     elseif expand("%:e") == 'py'
         call setline(1,"#!/usr/bin/env python")
         call append(line("."),"# coding=utf-8")
-	    call append(line(".")+1, "") 
+        call append(line(".")+1, "")
     elseif expand("%:e") == 'cpp'
-		call setline(1,"#include <iostream>") 
-		call append(line("."), "") 
+        call setline(1,"#include <iostream>")
+        call append(line("."), "")
     elseif expand("%:e") == 'cc'
-		call setline(1,"#include <iostream>") 
-		call append(line("."), "") 
+        call setline(1,"#include <iostream>")
+        call append(line("."), "")
     elseif expand("%:e") == 'c'
-		call setline(1,"#include <stdio.h>") 
-		call append(line("."), "") 
+        call setline(1,"#include <stdio.h>")
+        call append(line("."), "")
     elseif expand("%:e") == 'h'
-		call setline(1, "#pragma once")
+        call setline(1, "#pragma once")
     elseif expand("%:e") == 'hpp'
-		call setline(1, "#pragma once")
-	endif
-endfunc 
+        call setline(1, "#pragma once")
+    endif
+endfunc
 autocmd BufNewFile * normal G
 
-" vim-plug 
+" vim-plug
 " ************BEGIN*************
 call plug#begin('~/.vim/plugged')
 " 对齐插件
@@ -192,6 +192,8 @@ Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'w0rp/ale'
 "go plugins
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+"auto formater
+Plug 'Chiel92/vim-autoformat'
 call plug#end()
 " ************END*************
 
@@ -225,17 +227,17 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 
 "nerdtree-git-plugin
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
+            \ "Modified"  : "✹",
+            \ "Staged"    : "✚",
+            \ "Untracked" : "✭",
+            \ "Renamed"   : "➜",
+            \ "Unmerged"  : "═",
+            \ "Deleted"   : "✖",
+            \ "Dirty"     : "✗",
+            \ "Clean"     : "✔︎",
+            \ 'Ignored'   : '☒',
+            \ "Unknown"   : "?"
+            \ }
 
 "vim-airline
 let g:airline_theme="onedark"
@@ -251,7 +253,7 @@ let g:airline_right_alt_sep = ''
 
 "vim-colorschemes
 "默认主题
-colorscheme luna-term 
+colorscheme luna-term
 
 "change-colorscheme
 nnoremap <silent> <F9> :PreviousColorScheme<cr>
@@ -288,12 +290,12 @@ nmap <leader>f <Plug>(easymotion-overwin-f)
 nmap <leader>s <Plug>(easymotion-overwin-f2)
 
 "YouCompleteMe
-let g:ycm_confirm_extra_conf = 0 
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
-let g:ycm_seed_identifiers_with_syntax = 1 
-let g:ycm_complete_in_comments = 1 
-let g:ycm_complete_in_strings = 1 
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
 "******************** YCM C language mappings**************************
 " nnoremap <leader>h :YcmCompleter GoToDeclaration<cr>
 " nnoremap <leader>i :YcmCompleter GoToDefinition<cr>
@@ -308,14 +310,14 @@ nnoremap <Tab>d :YcmCompleter GoToDefinition<cr>
 nnoremap <Tab>r :YcmCompleter GoToReferences<cr>
 nnoremap <Tab>c :YcmCompleter GetDoc<cr>
 nnoremap <Tab>t :YcmCompleter GetType<cr>
-nnoremap <Tab>n :YcmCompleter RefactorRename 
+nnoremap <Tab>n :YcmCompleter RefactorRename
 map <F5> :!javac %&&java %:r <CR>
 
 
 "git commit browser:vim-fugitive and gv
 "open commit browser
-nnoremap <leader>g :GV<cr>     
-"will only list commits that affected the current file  
+nnoremap <leader>g :GV<cr>
+"will only list commits that affected the current file
 nnoremap <leader>G :GV!<cr>
 "fills the location list with the revisions of the current file
 nnoremap <leader>gg :GV?<cr>
@@ -362,7 +364,7 @@ nnoremap <leader>= :Tab /=<cr>
 
 " ack
 "<Leader>c进行搜索，同时不自动打开第一个匹配的文件"
-map <Leader>c :Ack!<Space> 
+map <Leader>c :Ack!<Space>
 "调用ag进行搜索
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
@@ -415,17 +417,17 @@ let g:mkdp_refresh_slow = 0
 map K <Plug>(expand_region_expand)
 map J <Plug>(expand_region_shrink)
 let g:expand_region_text_objects = {
-      \ 'iw'  :0,
-      \ 'iW'  :0,
-      \ 'i"'  :0,
-      \ 'i''' :0,
-      \ 'i]'  :1, 
-      \ 'ib'  :1, 
-      \ 'iB'  :1, 
-      \ 'il'  :0, 
-      \ 'ip'  :1,
-      \ 'ie'  :0, 
-      \ }"
+            \ 'iw'  :0,
+            \ 'iW'  :0,
+            \ 'i"'  :0,
+            \ 'i''' :0,
+            \ 'i]'  :1,
+            \ 'ib'  :1,
+            \ 'iB'  :1,
+            \ 'il'  :0,
+            \ 'ip'  :1,
+            \ 'ie'  :0,
+            \ }"
 
 
 " vim-multiple-cursors
@@ -450,10 +452,10 @@ function! s:build_quickfix_list(lines)
     cc
 endfunction
 let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+            \ 'ctrl-q': function('s:build_quickfix_list'),
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
 "Default fzf layout
 let g:fzf_layout = { 'down': '~40%'  }
 "set up fzf window using a Vim command
@@ -462,18 +464,18 @@ let g:fzf_layout = { 'window': '-tabnew'  }
 let g:fzf_layout = { 'window': '10split enew'  }
 let g:fzf_colors =
             \ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'border':  ['fg', 'Ignore'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
 
 "junegunn/goyo.vim
 nnoremap <c-w> :Goyo <cr>
@@ -520,7 +522,7 @@ nmap <Leader>ad :ALEDetail<CR>
 au FileType go nmap <Space>b :GoBuild<cr>
 au FileType go nmap <Space>r :GoRun<cr>
 au FileType go nmap <Space>d :GoDef<cr>
-au FileType go nmap <Space>i :GoImport 
+au FileType go nmap <Space>i :GoImport
 au FileType go nmap <Space>n :GoRename<cr>
 au FileType go nmap <Space>s :GoInstall<cr>
 au FileType go nmap <Space>t :GoTest<cr>
@@ -528,6 +530,12 @@ au FileType go nmap <Space>at :GoAddTags<cr>
 au FileType go nmap <Space>rt :GoRemoveTags<cr>
 let g:go_fmt_command = "goimports"
 
+"Chiel92/vim-autoformat
+"F3格式化代码
+noremap <F3> :Autoformat<CR>
+let g:autoformat_verbosemode=1
+"保存时自动格式化代码，针对所有支持的文件
+" au BufWrite * :Autoformat<cr>
 
 "other
 nnoremap <leader>q :q<cr>
