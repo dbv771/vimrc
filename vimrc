@@ -286,6 +286,10 @@ nmap <leader>w <Plug>(easymotion-overwin-w)
 map <leader>f <Plug>(easymotion-bd-f)
 nmap <leader>f <Plug>(easymotion-overwin-f)
 nmap <leader>s <Plug>(easymotion-overwin-f2)
+" Move to line
+map <Leader>j <Plug>(easymotion-bd-jk)
+nmap <Leader>j <Plug>(easymotion-overwin-line)
+
 
 "YouCompleteMe
 let g:ycm_confirm_extra_conf = 0 
@@ -527,6 +531,7 @@ au FileType go nmap <Space>t :GoTest<cr>
 au FileType go nmap <Space>at :GoAddTags<cr>
 au FileType go nmap <Space>rt :GoRemoveTags<cr>
 let g:go_fmt_command = "goimports"
+au FileType go nnoremap <leader>r :!go run %<cr>
 
 
 "other
