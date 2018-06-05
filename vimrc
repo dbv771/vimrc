@@ -544,6 +544,8 @@ let g:autoformat_verbosemode=1
 
 "other
 nnoremap <leader>q :q<cr>
+inoremap <leader>q <Esc>:q<cr>
+
 "buffer change
 nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
@@ -567,3 +569,5 @@ nnoremap <c-u> viwUe
 map <space> /
 map <c-space> ?
 map <silent> <leader><cr> :noh<cr>
+"移动到配对的右外侧
+imap <c-a> <Esc>la
