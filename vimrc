@@ -571,3 +571,7 @@ map <c-space> ?
 map <silent> <leader><cr> :noh<cr>
 "移动到配对的右外侧
 imap <c-a> <Esc>la
+"插入模式移动到下一行
+imap <c-d> <Esc>o
+
+nnoremap <leader>vc iecho -e “\033[42;37m 绿底白字 \033[0m” 
