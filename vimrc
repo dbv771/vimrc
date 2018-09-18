@@ -194,6 +194,12 @@ Plug 'w0rp/ale'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 "auto formater
 Plug 'Chiel92/vim-autoformat'
+"代码补全
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+"编程提示
+Plug 'davidhalter/jedi-vim'
 call plug#end()
 " ************END*************
 
@@ -315,7 +321,6 @@ nnoremap <Tab>r :YcmCompleter GoToReferences<cr>
 nnoremap <Tab>c :YcmCompleter GetDoc<cr>
 nnoremap <Tab>t :YcmCompleter GetType<cr>
 nnoremap <Tab>n :YcmCompleter RefactorRename
-map <F5> :!javac %&&java %:r <CR>
 
 
 "git commit browser:vim-fugitive and gv
@@ -575,3 +580,33 @@ imap <c-a> <Esc>la
 imap <c-d> <Esc>o
 
 nnoremap <leader>vc iecho -e “\033[42;37m 绿底白字 \033[0m” 
+
+ """"""""""""""""""""""
+    "Quickly Run
+    """"""""""""""""""""""
+map <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'java'
+        exec "!javac %"
+        exec "!time java %<"
+    elseif &filetype == 'sh'
+        :!time bash %
+    elseif &filetype == 'python'
+        exec "!time python %"
+    elseif &filetype == 'html'
+        exec "!firefox % &"
+    elseif &filetype == 'go'
+"        exec "!go build %<"
+        exec "!time go run %"
+    elseif &filetype == 'mkd'
+        exec "!~/.vim/markdown.pl % > %.html &"
+        exec "!firefox %.html &"
+    endif
+endfunc
