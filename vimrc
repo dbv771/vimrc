@@ -227,7 +227,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 "快捷键
-map <leader>n :NERDTreeToggle<cr>
+map <leader>m :NERDTreeToggle<cr>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
@@ -578,6 +578,8 @@ map <silent> <leader><cr> :noh<cr>
 imap <c-a> <Esc>la
 "插入模式移动到下一行
 imap <c-d> <Esc>o
+"移动到末尾
+imap <c-e> <Esc>A
 
 nnoremap <leader>vc iecho -e “\033[42;37m 绿底白字 \033[0m” 
 
