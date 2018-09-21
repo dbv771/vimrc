@@ -259,7 +259,7 @@ let g:airline_right_alt_sep = ''
 
 "vim-colorschemes
 "默认主题
-colorscheme luna-term
+colorscheme 3dglasses
 
 "change-colorscheme
 nnoremap <silent> <F9> :PreviousColorScheme<cr>
