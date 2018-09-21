@@ -200,6 +200,8 @@ Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 "编程提示
 Plug 'davidhalter/jedi-vim'
+"Dracular vim
+Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 " ************END*************
 
@@ -546,6 +548,9 @@ noremap <F3> :Autoformat<CR>
 let g:autoformat_verbosemode=1
 "保存时自动格式化代码，针对所有支持的文件
 " au BufWrite * :Autoformat<cr>
+
+"Dracular vim
+color dracula
 
 "other
 nnoremap <leader>q :q<cr>
