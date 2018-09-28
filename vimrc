@@ -202,13 +202,17 @@ Plug 'garbas/vim-snipmate'
 Plug 'davidhalter/jedi-vim'
 "Dracular vim
 Plug 'dracula/vim', { 'as': 'dracula' }
+"文本编辑
+Plug 'chxuan/vim-edit'
+"强化f/t
+Plug 'rhysd/clever-f.vim'
 call plug#end()
 " ************END*************
 
 "编辑vimrc文件
 nnoremap <leader>e :e $MYVIMRC<cr>
 "重新加载vimrc文件
-nnoremap <leader>r :source $MYVIMRC<cr>
+" nnoremap <leader>r :source $MYVIMRC<cr>
 
 " 安装、更新、删除插件
 nnoremap <leader><leader>i :PlugInstall<cr>
@@ -393,8 +397,6 @@ let g:ack_use_cword_for_empty_search = 1
 
 
 " vim-smooth-scroll
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
@@ -540,7 +542,7 @@ au FileType go nmap <Space>t :GoTest<cr>
 au FileType go nmap <Space>at :GoAddTags<cr>
 au FileType go nmap <Space>rt :GoRemoveTags<cr>
 let g:go_fmt_command = "goimports"
-au FileType go nnoremap <leader>r :!go run %<cr>
+" au FileType go nnoremap <leader>r :!go run %<cr>
 
 "Chiel92/vim-autoformat
 "F3格式化代码
@@ -551,6 +553,18 @@ let g:autoformat_verbosemode=1
 
 "Dracular vim
 color dracula
+
+"vim edit
+nnoremap Y :CopyText<cr>
+nnoremap D :DeleteText<cr>
+nnoremap C :ChangeText<cr>
+nnoremap <leader>r :ReplaceTo<space>
+
+"f/t增强
+let g:clever_f_ignore_case=1
+let g:clever_f_smart_case=1
+map ; <Plug>(clever-f-repeat-forward)
+map ' <Plug>(clever-f-repeat-back)
 
 "other
 nnoremap <leader>q :q<cr>
