@@ -589,10 +589,6 @@ inoremap jj <Esc>
 inoremap <c-u> <esc>viwUea
 nnoremap <c-u> viwUe
 
-"Map <Space> to / (search) and <Ctrl>+<Space> to ?
-map <space> /
-map <c-space> ?
-map <silent> <leader><cr> :noh<cr>
 "移动到配对的右外侧
 imap <c-a> <Esc>la
 "插入模式移动到下一行
@@ -631,3 +627,8 @@ func! CompileRunGcc()
         exec "!firefox %.html &"
     endif
 endfunc
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
