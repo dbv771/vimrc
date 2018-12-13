@@ -201,6 +201,8 @@ Plug 'mhinz/vim-startify'
 "fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf'}
 
+"根据缩进折叠代码
+Plug 'tmhedberg/SimpylFold'
 call plug#end()
 " ******************************END******************************
 
@@ -386,3 +388,6 @@ let g:fzf_colors =
             \ 'marker':  ['fg', 'Keyword'],
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
+"代码折叠
+set foldmethod=indent
+let g:SimpylFold_docstring_preview=1
