@@ -116,7 +116,9 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 "设置字体 fonts
-set guifont=Lucida_Console:h12:cANSI
+set guifont=Source_Code_Pro_for_Powerline:h12:cANSI
+" set guifont=Powerline_Consolas:h12:cANSI
+" set guifont=YaHei_Consolas_Hybrid:h12:cANSI " for program
 
 "buffer change
 nnoremap <c-n> :bn<cr>
@@ -124,15 +126,24 @@ nnoremap <c-p> :bp<cr>
 nnoremap <leader>d :bd<cr>
 nnoremap <c-d> yyp
 
-" GUI设置
+" GUI {{{
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
 " 窗口大小
-set lines=35 columns=120
-set guioptions-=m " 隐藏菜单栏 
-set guioptions-=T " 隐藏工具栏 
-set guioptions-=L " 隐藏左侧滚动条 
-set guioptions-=r " 隐藏右侧滚动条 
-set guioptions-=b " 隐藏底部滚动条 
-set showtabline=0 " 隐藏Tab栏
+set lines=35 columns=140
+" 分割出来的窗口位于当前窗口下边/右边
+set splitbelow
+set splitright
+"不显示工具/菜单栏
+set guioptions-=T
+set guioptions-=m
+set guioptions-=L
+set guioptions-=r
+set guioptions-=b
+" 使用内置 tab 样式而不是 gui
+set guioptions-=e
+set nolist
+" }}}
 
 " vim-plug
 " ******************************BEGIN******************************
@@ -229,7 +240,7 @@ map g# <Plug>(incsearch-nohl-g#)
 "使用<Esc><Esc>暂时关闭高亮功能
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 "使用Ctrl+k统计匹配个数
-" nnoremap <silent> <C-k> :%s///gn<CR>
+nnoremap <silent> <C-c> :%s///gn<CR>
 
 
 "f/t增强
@@ -243,6 +254,8 @@ map ' <Plug>(clever-f-repeat-back)
 let g:airline_theme="onedark"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ' '   
+" let g:airline#extensions#tabline#left_alt_sep = '|' "tabline中未激活buffer两端的分隔字符      
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -250,6 +263,30 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_symbols.branch = '⎇'
+let g:airline_section_b='%{strftime("%c")}'   "使用时显示当前时间
+" let g:airline_section_y='BN:%{bufnr("%")}'  "右下角显示bffer序号
+" let g:airline_mode_map = {
+  " \ '__' : '-',
+  " \ 'c'  : 'C',
+  " \ 'i'  : 'I',
+  " \ 'ic' : 'I',
+  " \ 'ix' : 'I',
+  " \ 'n'  : 'N',
+  " \ 'ni' : 'N',
+  " \ 'no' : 'N',
+  " \ 'R'  : 'R',
+  " \ 'Rv' : 'R',
+  " \ 's'  : 'S',
+  " \ 'S'  : 'S',
+  " \ '' : 'S',
+  " \ 't'  : 'T',
+  " \ 'v'  : 'V',
+  " \ 'V'  : 'V',
+  " \ '' : 'V',
+  " \ }
 
 "nerdtree
 "close vim if only nerdtree
@@ -259,6 +296,22 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 "快捷键
 map <leader>n :NERDTreeToggle<cr>
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+"nerdtree-git-plugin
+let g:NERDTreeIndicatorMapCustom = {
+            \ "Modified"  : "✹",
+            \ "Staged"    : "✚",
+            \ "Untracked" : "✭",
+            \ "Renamed"   : "➜",
+            \ "Unmerged"  : "═",
+            \ "Deleted"   : "✖",
+            \ "Dirty"     : "✗",
+            \ "Clean"     : "✔︎",
+            \ 'Ignored'   : '☒',
+            \ "Unknown"   : "?"
+            \ }
 
 "vim-easymotion
 let g:EasyMotion_smartcase=1
@@ -319,10 +372,6 @@ let g:fzf_action = {
             \ 'ctrl-v': 'vsplit' }
 "Default fzf layout
 let g:fzf_layout = { 'down': '~40%'  }
-"set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew'  }
-let g:fzf_layout = { 'window': '-tabnew'  }
-let g:fzf_layout = { 'window': '10split enew'  }
 let g:fzf_colors =
             \ { 'fg':      ['fg', 'Normal'],
             \ 'bg':      ['bg', 'Normal'],
