@@ -1,6 +1,25 @@
-" By ZhangYong 2018-12-13
+" By ZhangYong 2019年5月19日 http://www.zhyong.cn
 " for windows gvim
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 隐藏GVIM菜单及设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+" 窗口大小
+set lines=35 columns=140
+" 分割出来的窗口位于当前窗口下边/右边
+set splitbelow
+set splitright
+"不显示工具/菜单栏
+set guioptions-=T
+set guioptions-=m
+set guioptions-=L
+set guioptions-=r
+set guioptions-=b
+" 使用内置 tab 样式而不是 gui
+set guioptions-=e
+set nolist
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用设置
@@ -22,9 +41,8 @@ set cursorline      "高亮显示当前行
 set whichwrap+=<,>,h,l  "设置光标键跨行
 set virtualedit=block,onemore   "允许光标出现在最后一个字符的后面
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"代码缩进与排版
+" 代码缩进与排版
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autoindent      "设置自动缩进
 set cindent     "设置使用C/C++语言的自动缩进方式
@@ -39,23 +57,11 @@ set smarttab        "在行和段开始处使用制表符
 "set nowrap     "禁止折行
 set backspace=2     "使用回车键正常处理indent.eol,start等
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"代码补全
+" 代码补全
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set wildmenu        "vim自身命令行模式智能补全
 set completeopt-=preview    "补全时不显示窗口，只显示补全列表
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"搜索设置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set hlsearch        "高亮显示搜索结果
-set incsearch       "开启实时搜索功能
-set ignorecase      "搜索时大小写不敏感
-set magic           "设置魔术
-set smartcase       "智能区分大小写
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "代码折叠
@@ -63,9 +69,8 @@ set smartcase       "智能区分大小写
 set foldmethod=syntax       "设置基于语法进行代码折叠
 set nofoldenable            "关闭代码折叠
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"缓存设置
+" 缓存设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nobackup        "设置不备份
 set noswapfile      "禁止生成临时文件
@@ -73,9 +78,8 @@ set autoread        "文件在vim之外修改过，自动重新载入
 set autowrite       "设置自动保存
 set confirm         "在处理未保存或只读文件时，弹出确认
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"编码设置
+" 编码设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set langmenu=zh_CN.UTF-8
 set helplang=cn
@@ -83,75 +87,54 @@ set termencoding=utf-8
 set encoding=utf8
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 
-"其它
-"mapping esc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 优化设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"映射 esc 键为 jj
 inoremap jj <Esc>
-"快速打开vim配置
+"快速打开vim配置文件：_vimrc
 nnoremap <leader>e :e ~/_vimrc<cr>
 "刷新配置
 nnoremap <leader>r :source $MYVIMRC<cr>
-
-" C-U in insert/normal mode, to uppercase the word under cursor
+" 插入模式、正常模式按 Ctrl+u 快速转换为大写
 inoremap <c-u> <esc>viwUea
 nnoremap <c-u> viwUe
+"Ctrl+d 复制本行并粘贴到一下行
+nnoremap <c-d> yyp
 
-"other
+" <leader>+q 快速退出vim
 nnoremap <leader>q :q<cr>
 inoremap <leader>q <Esc>:q<cr>
 
-
-
-"移动到配对的右外侧
+"插入模式快速到另一个字符右边，对于配对的符号（如括号）很有用
 imap <c-a> <Esc>la
 "插入模式移动到下一行
 imap <c-d> <Esc>o
 "移动到末尾
 imap <c-e> <Esc>A
 
-" Enable folding
+" 添加“空格键”为代码折叠
 set foldmethod=indent
 set foldlevel=99
 nnoremap <space> za
 
-"Easy window navigation
+"若打开分割窗口，可快速切换窗口
+"快捷键提示：Ctrl+w w 切换窗口; Ctrl+w s 水平分割; Ctrl+w v 竖直分割
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-"设置字体 fonts
-set guifont=Source_Code_Pro_for_Powerline:h12:cANSI
-" set guifont=Powerline_Consolas:h12:cANSI
-" set guifont=YaHei_Consolas_Hybrid:h12:cANSI " for program
-
 "buffer change
 nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
 nnoremap <leader>d :bd<cr>
-nnoremap <c-d> yyp
-
-" GUI {{{
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-" 窗口大小
-set lines=35 columns=140
-" 分割出来的窗口位于当前窗口下边/右边
-set splitbelow
-set splitright
-"不显示工具/菜单栏
-set guioptions-=T
-set guioptions-=m
-set guioptions-=L
-set guioptions-=r
-set guioptions-=b
-" 使用内置 tab 样式而不是 gui
-set guioptions-=e
-set nolist
-" }}}
 
 " vim-plug
 " ******************************BEGIN******************************
 call plug#begin('~/.vim/plugged')
+"中文vim入门，不需要可注释掉
+Plug 'yianwillis/vimcdoc'
 "vim-colorschemes
 Plug 'flazz/vim-colorschemes'
 "change scheme
@@ -208,9 +191,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf'}
 "根据缩进折叠代码
 Plug 'tmhedberg/SimpylFold'
 
-"文本搜索ag
+"文本搜索rg
 Plug 'mileszs/ack.vim'
-Plug 'rking/ag.vim'
 
 "彩虹括号增强
 Plug 'luochen1990/rainbow'
@@ -223,15 +205,16 @@ Plug 'vim-syntastic/syntastic'
 
 "复制增强
 Plug 'machakann/vim-highlightedyank'
+
+"快速打开大文件
+Plug 'vim-scripts/LargeFile'
 call plug#end()
 " ******************************END******************************
 
-
-" 安装、更新、删除插件
+" VimPlug快捷键：安装、更新、删除插件
 nnoremap <leader><leader>i :PlugInstall<cr>
 nnoremap <leader><leader>u :PlugUpdate<cr>
 nnoremap <leader><leader>c :PlugClean<cr>
-
 
 "vim-colorschemes
 "默认主题
@@ -412,8 +395,8 @@ let g:fzf_colors =
 set foldmethod=indent
 let g:SimpylFold_docstring_preview=1
 
-"Ack和ag
-let g:ackprg = 'ag --nogroup --nocolor --column'
+"Ack和rg
+let g:ackprg = 'rg '
 nnoremap <C-s> :Ack<space>
 
 "彩虹括号增强
@@ -426,3 +409,6 @@ nnoremap <leader>= :Tab /=<cr>
 " 复制增强
 let g:highlightedyank_highlight_duration = 1000
 let g:highlightedyank_highlight_duration = -1
+
+"设置字体 fonts
+set guifont=Source_Code_Pro_for_Powerline:h12:cANSI
